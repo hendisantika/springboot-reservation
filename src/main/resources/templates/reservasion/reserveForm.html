@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="|${#temporals.format(date, 'yyyy/M/d')}${room.roomName}|"></title>
+</head>
+<body th:with="user=${#authentication.principal.user}">
+<div>
+    <a th:href="@{'/rooms/' + ${date}}">To the meeting room list</a>
+</div>
+
+<p style="color:red;" th:if="${error != null}" th:text="${error}"></p>
+
+<form method="post" th:action="@{'/reservations/' + ${date} + '/' + ${roomId}}" th:object="${reservationForm}">
+    conference room: <span th:text="${room.roomName}">Konohagakure</span><br/>
+    Name of reservation person: <span th:text="${user.lastName + ' ' + user.firstName}">Uzumaki Naruto</span><br/>
+    Date: <span th:text="${#temporals.format(date, 'yyyy/M/d')}">2016/5/20</span><br/>
+    Time zone:
+    <select th:field="*{startTime}">
+        <option th:each="time : ${timeList}" th:text="${time}" th:value="${time}">9:00</option>
+    </select>
+    <span style="color:red" th:errors="*{startTime}" th:if="${#fields.hasErrors('*{startTime}')}">error!</span>
+    ～
+    <select th:field="*{endTime}">
+        <option th:each="time : ${timeList}" th:text="${time}" th:value="${time}">10:00</option>
+    </select>
+    <span style="color:red" th:errors="*{endTime}" th:if="${#fields.hasErrors('endTime')}">error!</span><br/>
+    <button>Reservation</button>
+</form>
+
+<table>
+    <tr>
+        <th>Time zone</th>
+        <th>Reservation person</th>
+        <th>operating</th>
+    </tr>
+    <tr th:each="reservation : ${reservations}">
+        <td>
+            <span th:text="${reservation.startTime}"></span>
+            ～
+            <span th:text="${reservation.endTime}"></span>
+        </td>
+        <td>
+            <span th:text="${reservation.user.lastName}"></span>
+            <span th:text="${reservation.user.firstName}"></span>
+        </td>
+        <td>
+            <form method="post"
+                  sec:authorize="${hasRole('ADMIN') or #vars.user.userId == #vars.reservation.user.userId}"
+                  th:action="@{'/reservations/' + ${date} + '/' + ${roomId}}">
+                <input name="reservationId" th:value="${reservation.reservationId}" type="hidden"/>
+                <input name="cancel" type="submit" value="取消"/>
+            </form>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>

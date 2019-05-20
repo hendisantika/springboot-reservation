@@ -18,6 +18,6 @@ import java.util.List;
  */
 public interface ReservableRoomRepository extends JpaRepository<ReservableRoom, ReservableRoomId> {
 
-    List<ReservableRoom> findByReservableRoomId_reservedDateOrderByReservableRoomId_roomIdAsc(LocalDate reservedDate);
+    List<ReservableRoom> findByReservableRoomIdReservedDateOrderByReservableRoomIdRoomIdAsc(LocalDate reservedDate);
 
 }

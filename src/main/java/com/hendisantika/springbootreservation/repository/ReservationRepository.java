@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
-    List<Reservation> findByReservableRoom_ReservableRoomIdOrderByStartTimeAsc(ReservableRoomId reservableId);
+    List<Reservation> findByReservableRoomReservableRoomIdOrderByStartTimeAsc(ReservableRoomId reservableId);
 
 
 }

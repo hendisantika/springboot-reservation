@@ -14,7 +14,7 @@ import javax.persistence.*;
  * Time: 04:28
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
 public class User {
 

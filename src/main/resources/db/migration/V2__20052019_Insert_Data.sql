@@ -1,10 +1,10 @@
-INSERT INTO usr (user_id, first_name, last_name, role_name, password)
+INSERT INTO users (user_id, first_name, last_name, role_name, password)
 VALUES ('naruto', 'Uzumaki', 'Naruto', 'USER', '$2a$10$oxSJl.keBwxmsMLkcT9lPeAIxfNTPNQxpeywMrF7A3kVszwUTqfTK');
-INSERT INTO usr (user_id, first_name, last_name, role_name, password)
+INSERT INTO users (user_id, first_name, last_name, role_name, password)
 VALUES ('sasuke', 'Uchiha', 'Sasuke', 'USER', '$2a$10$oxSJl.keBwxmsMLkcT9lPeAIxfNTPNQxpeywMrF7A3kVszwUTqfTK');
-INSERT INTO usr (user_id, first_name, last_name, role_name, password)
+INSERT INTO users (user_id, first_name, last_name, role_name, password)
 VALUES ('sakura', 'Haruno', 'Sakura', 'USER', '$2a$10$oxSJl.keBwxmsMLkcT9lPeAIxfNTPNQxpeywMrF7A3kVszwUTqfTK');
-INSERT INTO usr (user_id, first_name, last_name, role_name, password)
+INSERT INTO users (user_id, first_name, last_name, role_name, password)
 VALUES ('kakashi', 'Hatake', 'KAkahsi', 'ADMIN', '$2a$10$oxSJl.keBwxmsMLkcT9lPeAIxfNTPNQxpeywMrF7A3kVszwUTqfTK');
 --
 INSERT INTO meeting_room (room_name)

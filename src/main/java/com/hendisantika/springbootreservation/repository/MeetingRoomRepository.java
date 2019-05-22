@@ -1,6 +1,6 @@
 package com.hendisantika.springbootreservation.repository;
 
-import com.hendisantika.springbootreservation.domain.model.MeetingRoom;
+import com.hendisantika.springbootreservation.domain.MeetingRoom;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

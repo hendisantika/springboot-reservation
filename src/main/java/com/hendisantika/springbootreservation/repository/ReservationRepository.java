@@ -1,7 +1,7 @@
 package com.hendisantika.springbootreservation.repository;
 
-import com.hendisantika.springbootreservation.domain.model.ReservableRoomId;
-import com.hendisantika.springbootreservation.domain.model.Reservation;
+import com.hendisantika.springbootreservation.domain.ReservableRoomId;
+import com.hendisantika.springbootreservation.domain.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

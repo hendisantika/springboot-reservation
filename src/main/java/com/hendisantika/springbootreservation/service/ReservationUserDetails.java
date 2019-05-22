@@ -1,6 +1,6 @@
 package com.hendisantika.springbootreservation.service;
 
-import com.hendisantika.springbootreservation.domain.model.User;
+import com.hendisantika.springbootreservation.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;

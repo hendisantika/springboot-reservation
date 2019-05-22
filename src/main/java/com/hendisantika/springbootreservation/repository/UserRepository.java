@@ -1,6 +1,6 @@
 package com.hendisantika.springbootreservation.repository;
 
-import com.hendisantika.springbootreservation.domain.model.User;
+import com.hendisantika.springbootreservation.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

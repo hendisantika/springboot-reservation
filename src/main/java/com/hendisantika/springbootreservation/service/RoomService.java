@@ -1,7 +1,7 @@
 package com.hendisantika.springbootreservation.service;
 
-import com.hendisantika.springbootreservation.domain.model.MeetingRoom;
-import com.hendisantika.springbootreservation.domain.model.ReservableRoom;
+import com.hendisantika.springbootreservation.domain.MeetingRoom;
+import com.hendisantika.springbootreservation.domain.ReservableRoom;
 import com.hendisantika.springbootreservation.repository.MeetingRoomRepository;
 import com.hendisantika.springbootreservation.repository.ReservableRoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;

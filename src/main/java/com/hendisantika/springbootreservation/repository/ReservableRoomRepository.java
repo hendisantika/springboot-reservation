@@ -1,7 +1,7 @@
 package com.hendisantika.springbootreservation.repository;
 
-import com.hendisantika.springbootreservation.domain.model.ReservableRoom;
-import com.hendisantika.springbootreservation.domain.model.ReservableRoomId;
+import com.hendisantika.springbootreservation.domain.ReservableRoom;
+import com.hendisantika.springbootreservation.domain.ReservableRoomId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;

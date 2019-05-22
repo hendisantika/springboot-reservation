@@ -1,6 +1,6 @@
 package com.hendisantika.springbootreservation.service;
 
-import com.hendisantika.springbootreservation.domain.model.User;
+import com.hendisantika.springbootreservation.domain.User;
 import com.hendisantika.springbootreservation.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

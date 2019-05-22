@@ -1,4 +1,4 @@
-package com.hendisantika.springbootreservation.domain.model;
+package com.hendisantika.springbootreservation.domain;
 
 /**
  * Created by IntelliJ IDEA.

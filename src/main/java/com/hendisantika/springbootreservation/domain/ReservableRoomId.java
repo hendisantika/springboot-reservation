@@ -1,4 +1,4 @@
-package com.hendisantika.springbootreservation.domain.model;
+package com.hendisantika.springbootreservation.domain;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;

@@ -1,8 +1,8 @@
 package com.hendisantika.springbootreservation.service;
 
-import com.hendisantika.springbootreservation.domain.model.ReservableRoom;
-import com.hendisantika.springbootreservation.domain.model.ReservableRoomId;
-import com.hendisantika.springbootreservation.domain.model.Reservation;
+import com.hendisantika.springbootreservation.domain.ReservableRoom;
+import com.hendisantika.springbootreservation.domain.ReservableRoomId;
+import com.hendisantika.springbootreservation.domain.Reservation;
 import com.hendisantika.springbootreservation.exception.AlreadyReservedException;
 import com.hendisantika.springbootreservation.exception.UnavailableReservationException;
 import com.hendisantika.springbootreservation.repository.ReservableRoomRepository;
@@ -36,7 +36,7 @@ public class ReservationService {
     ReservableRoomRepository reservableRoomRepository;
 
     /**
-     * Return a list of reservations.
+     * Return a list of reservation.
      *
      * @param reservableRoomId
      * @return

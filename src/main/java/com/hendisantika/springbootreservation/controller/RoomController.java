@@ -1,14 +1,14 @@
 package com.hendisantika.springbootreservation.controller;
 
-import com.hendisantika.springbootreservation.domain.model.ReservableRoom;
+import com.hendisantika.springbootreservation.domain.ReservableRoom;
 import com.hendisantika.springbootreservation.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,7 +35,7 @@ public class RoomController {
      * @param model
      * @return
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     String listRooms(Model model) {
         LocalDate today = LocalDate.now();
         //Return today's reservation list
@@ -54,7 +54,7 @@ public class RoomController {
      * @param model
      * @return
      */
-    @RequestMapping(path = "{date}", method = RequestMethod.GET)
+    @GetMapping(path = "{date}")
     String listRooms(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @PathVariable("date") LocalDate date, Model model) {
         LocalDate today = LocalDate.now();
         //Return today's reservation list
@@ -62,7 +62,7 @@ public class RoomController {
 
         model.addAttribute("rooms", rooms);
 
-        return "room/listRooms";
+        return "reservation/reserveForm";
 
     }
 

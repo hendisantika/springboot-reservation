@@ -2,7 +2,7 @@ package com.hendisantika.springbootreservation.controller;
 
 import com.hendisantika.springbootreservation.domain.ReservableRoom;
 import com.hendisantika.springbootreservation.service.RoomService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +14,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
+ * Controller for managing meeting room listings
+ *
+ * Uses constructor injection via Lombok's @RequiredArgsConstructor for better testability
+ * and immutability of dependencies.
+ *
  * Created by IntelliJ IDEA.
  * Project : springboot-reservation
  * User: hendisantika
@@ -24,10 +29,10 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("rooms")
+@RequiredArgsConstructor
 public class RoomController {
 
-    @Autowired
-    RoomService roomService;
+    private final RoomService roomService;
 
     /**
      * Return of today's reservation list(/rooms)
@@ -51,19 +56,19 @@ public class RoomController {
     /**
      * Return of reservation list for specific day(/rooms/{date})
      *
-     * @param model
-     * @return
+     * @param date The specific date to show available rooms for
+     * @param model Spring MVC model
+     * @return The name of the Thymeleaf template to render
      */
     @GetMapping(path = "{date}")
     String listRooms(@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) @PathVariable("date") LocalDate date, Model model) {
-        LocalDate today = LocalDate.now();
-        //Return today's reservation list
+        // Get list of reservable rooms for the specified date
         List<ReservableRoom> rooms = roomService.findReservableRooms(date);
 
+        model.addAttribute("date", date);
         model.addAttribute("rooms", rooms);
 
-        return "reservation/reserveForm";
-
+        return "room/listRooms";
     }
 
 

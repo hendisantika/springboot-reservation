@@ -1,8 +1,12 @@
 package com.hendisantika.springbootreservation.domain;
 
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 /**

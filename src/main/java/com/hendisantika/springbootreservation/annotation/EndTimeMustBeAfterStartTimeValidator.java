@@ -1,7 +1,7 @@
 package com.hendisantika.springbootreservation.annotation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 /**
  * Created by IntelliJ IDEA.

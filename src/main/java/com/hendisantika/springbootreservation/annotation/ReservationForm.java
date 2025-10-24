@@ -1,8 +1,8 @@
 package com.hendisantika.springbootreservation.annotation;
 
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalTime;
 

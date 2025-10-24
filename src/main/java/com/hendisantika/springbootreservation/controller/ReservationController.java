@@ -67,8 +67,8 @@ public class ReservationController {
      *
      * @return List of LocalTime objects representing available time slots
      */
-    @ModelAttribute
-    List<LocalTime> timeList() {
+    @ModelAttribute("timeList")
+    public List<LocalTime> timeList() {
         return Stream.iterate(LocalTime.of(0, 0), t -> t.plusMinutes(30))
                 .limit(24 * 2) // 48 slots (24 hours * 2 slots per hour)
                 .collect(Collectors.toList());

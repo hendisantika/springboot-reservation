@@ -1,33 +1,118 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title></title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Login - Conference Room Reservation System</title>
+    <link href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            max-width: 450px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .demo-credentials {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        .demo-credentials strong {
+            color: #667eea;
+        }
+    </style>
 </head>
 <body>
-<h3>Login form</h3>
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h1><i class="bi bi-calendar-check"></i> Conference Room</h1>
+            <p>Reservation System</p>
+        </div>
 
-<p th:if="${param.error}">
-    Error!
-</p>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${param.error}">
+            <strong>Error!</strong> Invalid username or password.
+            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+        </div>
 
-<form method="post" th:action="@{/login}">
-    <table>
-        <tr>
-            <td><label for="username">User:</label></td>
-            <td><input id="username" name="username" type="text" value="aaaa"/></td>
-        </tr>
-        <tr>
-            <td><label for="password">Password:</label></td>
-            <td><input id="password" name="password" type="password" value="demo"/></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <button type="submit">Login</button>
-            </td>
-        </tr>
-    </table>
-</form>
+        <form method="post" th:action="@{/login}">
+            <div class="mb-3">
+                <label class="form-label fw-semibold" for="username">Username</label>
+                <input autofocus class="form-control form-control-lg" id="username" name="username"
+                       placeholder="Enter your username" required type="text" value="aaaa"/>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-semibold" for="password">Password</label>
+                <input class="form-control form-control-lg" id="password" name="password" placeholder="Enter your password"
+                       required type="password" value="demo"/>
+            </div>
+
+            <button class="btn btn-primary btn-login w-100 btn-lg" type="submit">
+                Sign In
+            </button>
+
+            <div class="demo-credentials">
+                <strong>Demo Credentials:</strong><br>
+                Username: <code>aaaa</code><br>
+                Password: <code>demo</code>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

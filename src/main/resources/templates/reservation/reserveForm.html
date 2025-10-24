@@ -1,60 +1,259 @@
 <!DOCTYPE html>
 <html xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns:th="http://www.thymeleaf.org">
+      lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="|${#temporals.format(date, 'yyyy/M/d')}${room.roomName}|"></title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title th:text="|${#temporals.format(date, 'yyyy/M/d')} - ${room.roomName}|">Room Reservation</title>
+    <link href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .reservation-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .card-header-custom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .card-header-custom h2 {
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #667eea;
+            min-width: 150px;
+        }
+
+        .info-value {
+            color: #2d3748;
+        }
+
+        .time-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .time-selector select {
+            max-width: 120px;
+        }
+
+        .btn-reserve {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .btn-reserve:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .reservations-table {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-custom {
+            margin-top: 20px;
+        }
+
+        .table-custom thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .table-custom thead th {
+            border: none;
+            padding: 15px;
+            font-weight: 600;
+        }
+
+        .table-custom tbody tr {
+            transition: background-color 0.2s;
+        }
+
+        .table-custom tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .btn-cancel {
+            background: #dc3545;
+            border: none;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+
+        .btn-cancel:hover {
+            transform: scale(1.05);
+            background: #c82333;
+        }
+    </style>
 </head>
 <body th:with="user=${#authentication.principal.user}">
-<div>
-    <a th:href="@{'/rooms/' + ${date}}">To the meeting room list</a>
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-primary" th:href="@{'/rooms/' + ${date}}">
+            Conference Room Reservation System
+        </a>
+        <div>
+            <a class="btn btn-outline-primary me-2" th:href="@{'/rooms/' + ${date}}">
+                Back to Rooms
+            </a>
+            <form class="d-inline" method="post" th:action="@{/logout}">
+                <button class="btn btn-outline-danger" type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="content-container">
+    <div class="reservation-card">
+        <div class="card-header-custom">
+            <h2 th:text="${room.roomName}">Conference Room</h2>
+            <small>Make a new reservation</small>
+        </div>
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error != null}">
+            <strong>Error!</strong> <span th:text="${error}">Reservation error</span>
+            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+        </div>
+
+        <div class="info-row">
+            <div class="info-label">Conference Room:</div>
+            <div class="info-value" th:text="${room.roomName}">Room Name</div>
+        </div>
+
+        <div class="info-row">
+            <div class="info-label">Reservation Person:</div>
+            <div class="info-value" th:text="${user.lastName + ' ' + user.firstName}">User Name</div>
+        </div>
+
+        <div class="info-row">
+            <div class="info-label">Date:</div>
+            <div class="info-value" th:text="${#temporals.format(date, 'EEEE, MMMM d, yyyy')}">Date</div>
+        </div>
+
+        <form method="post" th:action="@{'/reservations/' + ${date} + '/' + ${roomId}}" th:object="${reservationForm}">
+            <div class="row align-items-end mt-4">
+                <div class="col-md-5">
+                    <label class="form-label fw-semibold">Start Time:</label>
+                    <select class="form-select form-select-lg" th:field="*{startTime}">
+                        <option th:each="time : ${timeList}" th:text="${time}" th:value="${time}">9:00</option>
+                    </select>
+                    <div class="text-danger mt-1" th:errors="*{startTime}" th:if="${#fields.hasErrors('startTime')}">
+                        Start time error
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <label class="form-label fw-semibold">End Time:</label>
+                    <select class="form-select form-select-lg" th:field="*{endTime}">
+                        <option th:each="time : ${timeList}" th:text="${time}" th:value="${time}">10:00</option>
+                    </select>
+                    <div class="text-danger mt-1" th:errors="*{endTime}" th:if="${#fields.hasErrors('endTime')}">
+                        End time error
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-primary btn-reserve w-100" type="submit">
+                        Reserve
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="reservations-table">
+        <h3 class="mb-0">Current Reservations</h3>
+        <p class="text-muted">View and manage existing reservations for this room</p>
+
+        <table class="table table-custom table-hover">
+            <thead>
+            <tr>
+                <th>Time Slot</th>
+                <th>Reserved By</th>
+                <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reservation : ${reservations}">
+                <td class="align-middle">
+                    <strong>
+                        <span th:text="${reservation.startTime}">9:00</span>
+                        -
+                        <span th:text="${reservation.endTime}">10:00</span>
+                    </strong>
+                </td>
+                <td class="align-middle">
+                    <span th:text="${reservation.user.lastName + ' ' + reservation.user.firstName}">User Name</span>
+                </td>
+                <td class="text-center align-middle">
+                    <form class="d-inline"
+                          method="post"
+                          sec:authorize="${hasRole('ADMIN') or #vars.user.userId == #vars.reservation.user.userId}"
+                          th:action="@{'/reservations/' + ${date} + '/' + ${roomId}}">
+                        <input name="reservationId" th:value="${reservation.reservationId}" type="hidden"/>
+                        <button class="btn-cancel" name="cancel" type="submit">
+                            Cancel
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(reservations)}">
+                <td class="text-center text-muted py-4" colspan="3">
+                    No reservations yet. Be the first to book this room!
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<p style="color:red;" th:if="${error != null}" th:text="${error}"></p>
-
-<form method="post" th:action="@{'/reservations/' + ${date} + '/' + ${roomId}}" th:object="${reservationForm}">
-    conference room: <span th:text="${room.roomName}">Konohagakure</span><br/>
-    Name of reservation person: <span th:text="${user.lastName + ' ' + user.firstName}">Uzumaki Naruto</span><br/>
-    Date: <span th:text="${#temporals.format(date, 'yyyy/M/d')}">2016/5/20</span><br/>
-    Time zone:
-    <select th:field="*{startTime}">
-        <option th:each="time : ${timeList}" th:text="${time}" th:value="${time}">9:00</option>
-    </select>
-    <span style="color:red" th:errors="*{startTime}" th:if="${#fields.hasErrors('*{startTime}')}">error!</span>
-    ～
-    <select th:field="*{endTime}">
-        <option th:each="time : ${timeList}" th:text="${time}" th:value="${time}">10:00</option>
-    </select>
-    <span style="color:red" th:errors="*{endTime}" th:if="${#fields.hasErrors('endTime')}">error!</span><br/>
-    <button>Reservation</button>
-</form>
-
-<table>
-    <tr>
-        <th>Time zone</th>
-        <th>Reservation person</th>
-        <th>operating</th>
-    </tr>
-    <tr th:each="reservation : ${reservations}">
-        <td>
-            <span th:text="${reservation.startTime}"></span>
-            ～
-            <span th:text="${reservation.endTime}"></span>
-        </td>
-        <td>
-            <span th:text="${reservation.user.lastName}"></span>
-            <span th:text="${reservation.user.firstName}"></span>
-        </td>
-        <td>
-            <form method="post"
-                  sec:authorize="${hasRole('ADMIN') or #vars.user.userId == #vars.reservation.user.userId}"
-                  th:action="@{'/reservations/' + ${date} + '/' + ${roomId}}">
-                <input name="reservationId" th:value="${reservation.reservationId}" type="hidden"/>
-                <input name="cancel" type="submit" value="取消"/>
-            </form>
-        </td>
-    </tr>
-
-</table>
+<script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

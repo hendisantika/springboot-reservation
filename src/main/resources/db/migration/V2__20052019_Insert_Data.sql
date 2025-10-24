@@ -1,11 +1,11 @@
 INSERT INTO users (user_id, first_name, last_name, role_name, password)
-VALUES ('naruto', 'Uzumaki', 'Naruto', 'USER', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu');
+VALUES ('naruto', 'Uzumaki', 'Naruto', 'USER', '$2a$12$46n/3m5nEnMEcLGsTqbHB.GAqAlD9Kn7e.ByowdRkcmkBM8elTL9e');
 INSERT INTO users (user_id, first_name, last_name, role_name, password)
-VALUES ('sasuke', 'Uchiha', 'Sasuke', 'USER', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu');
+VALUES ('sasuke', 'Uchiha', 'Sasuke', 'USER', '$2a$12$46n/3m5nEnMEcLGsTqbHB.GAqAlD9Kn7e.ByowdRkcmkBM8elTL9e');
 INSERT INTO users (user_id, first_name, last_name, role_name, password)
-VALUES ('sakura', 'Haruno', 'Sakura', 'USER', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu');
+VALUES ('sakura', 'Haruno', 'Sakura', 'USER', '$2a$12$46n/3m5nEnMEcLGsTqbHB.GAqAlD9Kn7e.ByowdRkcmkBM8elTL9e');
 INSERT INTO users (user_id, first_name, last_name, role_name, password)
-VALUES ('kakashi', 'Hatake', 'KAkahsi', 'ADMIN', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu');
+VALUES ('kakashi', 'Hatake', 'KAkahsi', 'ADMIN', '$2a$12$46n/3m5nEnMEcLGsTqbHB.GAqAlD9Kn7e.ByowdRkcmkBM8elTL9e');
 -- Password: password
 --
 INSERT INTO meeting_room (room_name)

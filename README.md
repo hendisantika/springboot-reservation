@@ -32,6 +32,20 @@ beautiful Bootstrap 5 UI.
 - **Maven**: Build tool
 - **Docker**: Containerization platform
 
+## Image Screen shot
+
+Login Page
+
+![Login Page](img/Login.png "Login Page")
+
+List Rooms
+
+![List Rooms](img/list.png "List Rooms")
+
+Reserve Page
+
+![Reserve Page](img/reserve.png "Reserve Page")
+
 ## Prerequisites
 
 ### Option 1: Docker (Recommended)
@@ -171,6 +185,17 @@ mvn spring-boot:run
 
 The application will start on `http://localhost:8080`
 
+## Default Login Credentials
+
+Use these credentials to login to the application:
+
+**Primary Login (Pre-filled):**
+
+- **Username**: `naruto`
+- **Password**: `53cret`
+
+The login form is pre-filled with these credentials for quick access.
+
 ## UI Design
 
 The application features a modern, responsive UI built with Bootstrap 5:
@@ -181,19 +206,18 @@ The application features a modern, responsive UI built with Bootstrap 5:
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 - **Color Scheme**: Purple/blue gradient theme (#667eea to #764ba2)
 
-## Default Test Users
+## Available Test Users
 
 The application comes with pre-configured test users for demonstration:
 
-| Username | Password | Role  | Full Name      |
-|----------|----------|-------|----------------|
-| aaaa     | demo     | USER  | Demo User      |
-| naruto   | password | USER  | Uzumaki Naruto |
-| sasuke   | password | USER  | Uchiha Sasuke  |
-| sakura   | password | USER  | Haruno Sakura  |
-| kakashi  | password | ADMIN | Hatake Kakashi |
+| Username   | Password   | Role  | Full Name      | Note                     |
+|------------|------------|-------|----------------|--------------------------|
+| **naruto** | **53cret** | USER  | Uzumaki Naruto | **Default (Pre-filled)** |
+| sasuke     | password   | USER  | Uchiha Sasuke  |                          |
+| sakura     | password   | USER  | Haruno Sakura  |                          |
+| kakashi    | password   | ADMIN | Hatake Kakashi | Admin privileges         |
 
-**Quick Login**: Use `aaaa` / `demo` for fastest access (pre-filled on login form)
+**Recommended Login**: Use `naruto` / `53cret` for fastest access (pre-filled on login form)
 
 ## Pre-configured Meeting Rooms
 
